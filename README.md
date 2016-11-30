@@ -1,6 +1,7 @@
 Enhanced Arma 3 Inventory 
 =====
 by Aaron Clark - http://www.epochmod.com
+for Arma 3 version 1.66+
 
 Features:
 =====
