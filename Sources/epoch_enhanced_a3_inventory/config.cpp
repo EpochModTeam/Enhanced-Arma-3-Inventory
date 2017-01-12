@@ -89,32 +89,32 @@ class CfgItemInteractions {
     class ItemMap
     {
         interactActions[] = {
-            {"Open Map","showMap true;"}
+            {"Open Map","hintSilent 'Testing: Open Map Action';"}
         };
     };
     class ItemRadio
     {
         interactActions[] = {
-            {"Open Radio","showRadio true;"}
+            {"Open Radio","hintSilent 'Testing: Open Radio Action';"}
         };
     };
     class ItemCompass
     {
         interactActions[] = {
-            {"Open Compass","showCompass true;"}
+            {"Open Compass","hintSilent 'Testing: Open Compass Action';"}
         };
     };
     class ItemGPS
     {
         interactActions[] = {
-            {"Open GPS","showGPS true;"}
+            {"Open GPS","hintSilent 'Testing: Open GPS Action';"}
         };
     };
     class ItemWatch
     {
         interactActions[] = {
-            {"Open Watch","showWatch true;"},
-            {"Open Notebook","showPad true;"}
+            {"Open Watch","hintSilent 'Testing: Open Watch Action';"},
+            {"Open Notebook","hintSilent 'Testing: Open Notebook Action';"}
         };
     };
 };
