@@ -96,8 +96,8 @@ class CfgFunctions {
      0 = Text Name of Action
      1 = Code to execute when button is pressed.
      2 = (optional) Condition evaluates string as code, code needs to return a BOOL.
-     3 = (optional) 0 = Do not display button if above condition is false (default), 1 =  Display Button but and use alternate button action code below.
-     4 = (optional) Code to execute when button is pressed on a failed Condition above.
+     3 = (optional) 0 = Do not display button if above condition is false (default), 1 =  Display Button and use alternate button action code below.
+     4 = (optional) Code to execute when the button is pressed on a failed condition above.
 */
 class CfgItemInteractions {
     class FirstAidKit
