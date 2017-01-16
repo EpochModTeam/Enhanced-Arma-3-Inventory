@@ -20,23 +20,24 @@ class CfgPatches {
 		requiredAddons[] = {"A3_Ui_F"};
 	};
 };
+
 class CfgMods
 {
 	class epoch_enhanced_a3_inventory
 	{
-		dir = "@epoch_enhanced_a3_inventory";
+		dir = "@EEA3I";
 		name = "Epoch Enhanced Arma 3 Inventory";
 		picture = "\epoch_enhanced_a3_inventory\epoch_ca.paa";
 		hidePicture = 0;
 		hideName = 0;
 		action = "http://www.epochmod.com";
-		version = "1.0";
-		ArmAVersion = 158;
+		version = "1.1";
+		ArmAVersion = 166;
 		overview = "Enhanced Inventory for Arma 3";
 	};
 };
 
-//
+// custom UI stuff for armor stats
 class RscProgress;
 class RscCustomProgress : RscProgress
 {
@@ -83,8 +84,18 @@ class CfgFunctions {
 	};
 };
 
-// example custom sub menu config
-/*
+/* example custom sub menu config
+ The condition and button action code have the following special variables available.
+     _thisItem = contains the classname of the item
+     _thisItemType = contains the type numbers:
+          type=256 magazine
+          type=801 uniform
+          etc.
+
+ interactActions Format:
+     0 = Text Name of Action
+     1 = Code to execute when button is pressed.
+     2 = (optional) Condition evaluates string as code, code needs to return a BOOL.
 class CfgItemInteractions {
     class ItemMap
     {
@@ -118,4 +129,3 @@ class CfgItemInteractions {
         };
     };
 };
-*/
