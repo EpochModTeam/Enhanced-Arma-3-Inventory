@@ -96,36 +96,15 @@ class CfgFunctions {
      0 = Text Name of Action
      1 = Code to execute when button is pressed.
      2 = (optional) Condition evaluates string as code, code needs to return a BOOL.
+     3 = (optional) Code to execute when button is pressed on a failed Condition above.
+*/
 class CfgItemInteractions {
-    class ItemMap
+    class FirstAidKit
     {
         interactActions[] = {
-            {"Open Map","hintSilent 'Testing: Open Map Action';"}
-        };
-    };
-    class ItemRadio
-    {
-        interactActions[] = {
-            {"Open Radio","hintSilent 'Testing: Open Radio Action';"}
-        };
-    };
-    class ItemCompass
-    {
-        interactActions[] = {
-            {"Open Compass","hintSilent 'Testing: Open Compass Action';"}
-        };
-    };
-    class ItemGPS
-    {
-        interactActions[] = {
-            {"Open GPS","hintSilent 'Testing: Open GPS Action';"}
-        };
-    };
-    class ItemWatch
-    {
-        interactActions[] = {
-            {"Open Watch","hintSilent 'Testing: Open Watch Action';"},
-            {"Open Notebook","hintSilent 'Testing: Open Notebook Action';"}
+            // Test actions - requires the player to have a watch equipped for "Check Pulse" action to show on double click of the First Aid Kit.
+            {"Check Pulse", "_target = player; if (cursorTarget isKindof 'Man') then {_target = cursorTarget}; if ((damage _target) > 0.1) then { hintSilent format['%1 Needs Medical Attention!',name _target];} else {hintSilent format['%1, Does Not Need Medical Attention.',name _target];};", "'ItemWatch' in (assignedItems player)", 1 , "hintSilent 'Watch Needed';" }
+            // {"Debug 1", "hintSilent str[_thisItem,_thisItemType];" },
         };
     };
 };
