@@ -106,7 +106,7 @@ if !(_interactedItem isEqualTo []) then {
             _x params [["_btn_text",""],["_btn_code",""],["_btn_condition","true"],["_btn_mode",0],["_btn_fail_code",""]];
             _logicCheck  = !(call compile _btn_condition);
             // mode 0 = do not show button if condition is not met.
-            // mode 1 = show button but disable if condition is not met, also supports optional tool tip.
+            // mode 1 = show button but execute alternate code when clicked.
             switch (_btn_mode) do {
                 case 1: {
                     _button_gen = _display ctrlCreate ["RscButtonMenu", _start_idc,_control];
