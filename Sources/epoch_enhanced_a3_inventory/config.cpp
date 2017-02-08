@@ -100,11 +100,17 @@ class CfgFunctions {
      4 = (optional) Code to execute when the button is pressed on a failed condition above.
 */
 class CfgItemInteractions {
+    class AllAmmoSettings // this is a fake class that holds the settings for the ammo repack feature.
+    {
+        interactActions[] = {
+            {"REPACK", "call EPOCH_fnc_ammoRepack;" } // To disable set this to an empty array here or in description.ext. interactActions[] = {};
+        };
+    };
     class FirstAidKit
     {
         interactActions[] = {
             // Test actions - requires the player to have a watch equipped for "Check Pulse" action to show on double click of the First Aid Kit.
-            {"Check Pulse", "_target = player; if (cursorTarget isKindof 'Man') then {_target = cursorTarget}; if ((damage _target) > 0.1) then { hintSilent format['%1 Needs Medical Attention!',name _target];} else {hintSilent format['%1, Does Not Need Medical Attention.',name _target];};", "'ItemWatch' in (assignedItems player)", 1 , "hintSilent 'Watch Needed';" }
+            {"Check Pulse", "_target = player; if (cursorTarget isKindof 'Man') then {_target = cursorTarget}; if ((damage _target) > 0.1) then { hintSilent format['%1 Needs Medical Attention!',name _target];} else {hintSilent format['%1, Does Not Need Medical Attention.',name _target];};", "!('ItemWatch' in (assignedItems player))", 1 , "hintSilent 'Watch Needed';" }
             // {"Debug 1", "hintSilent str[_thisItem,_thisItemType];" },
         };
     };

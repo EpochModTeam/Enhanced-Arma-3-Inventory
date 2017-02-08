@@ -20,7 +20,6 @@
 	NUMBER
 */
 //[[[cog import generate_private_arrays ]]]
-private ["_activeControl","_bg","_btn_arr","_buffer","_button_gen","_cfgItemInteractions","_config","_control","_thisItem","_display","_interactActions","_interactedItem","_magCount","_missionconfig","_pos","_start_idc","_thisItemType","_y2d"];
 //[[[end]]]
 
 _interactActions = [];
@@ -44,14 +43,28 @@ if !(_interactedItem isEqualTo []) then {
     _thisItem = _interactedItem select 1;
 
     // load action configs
-    _cfgItemInteractions = (configfile >> "CfgItemInteractions" >> _thisItem);
-    _missionconfig = (missionConfigFile >> "CfgItemInteractions" >> _thisItem);
-    if (isClass _missionconfig) then{
-        _cfgItemInteractions = _missionconfig;
+    _mainMissionConfig = (missionConfigFile >> "CfgItemInteractions");
+    _mainConfig = (configfile >> "CfgItemInteractions");
+    // find item classes
+    _selectedItemConfig = (_mainConfig >> _thisItem);
+    _selectedItemMissionConfig = (_mainMissionConfig >> _thisItem);
+    // prefer mission config over main
+    if (isClass _selectedItemMissionConfig) then{
+        _selectedItemConfig = _selectedItemMissionConfig;
     };
 
-    _config = (configfile >> "CfgWeapons" >> _thisItem);
+    // load ammo repack configs
+    _repackConfig = (_mainConfig >> "AllAmmoSettings");
+    _repackMissionConfig = (_mainMissionConfig >> "AllAmmoSettings");
+    // prefer mission config over main
+    if (isClass _repackMissionConfig) then{
+        _repackConfig = _repackMissionConfig;
+    };
+    _repack = getArray(_repackConfig >> "interactActions");
 
+
+    // get actual item config
+    _config = (configfile >> "CfgWeapons" >> _thisItem);
     if (isClass (_config)) then {
         _thisItemType = getNumber(_config >> "type");
     } else {
@@ -60,12 +73,14 @@ if !(_interactedItem isEqualTo []) then {
         _magCount = getNumber(_config >> "count");
     };
 
-    _interactActions = getArray(_cfgItemInteractions >> "interactActions");
+    _interactActions = getArray(_selectedItemConfig >> "interactActions");
 
     // ammo repack
     if (_magCount > 1) then {
-        _interactActions pushBack ["REPACK","call EPOCH_fnc_ammoRepack;"];
+        {_interactActions pushBack _x} forEach _repack;
     };
+
+    diag_log format["DEBUG: _interactActions %1",_interactActions];
 
     // build menu
     if !(_interactActions isEqualTo []) then {
@@ -104,7 +119,7 @@ if !(_interactedItem isEqualTo []) then {
         _start_idc = 12346;
         {
             _x params [["_btn_text",""],["_btn_code",""],["_btn_condition","true"],["_btn_mode",0],["_btn_fail_code",""]];
-            _logicCheck  = !(call compile _btn_condition);
+            _logicCheck  = call compile _btn_condition;
             // mode 0 = do not show button if condition is not met.
             // mode 1 = show button but execute alternate code when clicked.
             switch (_btn_mode) do {
