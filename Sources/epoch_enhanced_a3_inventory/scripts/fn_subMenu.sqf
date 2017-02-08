@@ -20,6 +20,7 @@
 	NUMBER
 */
 //[[[cog import generate_private_arrays ]]]
+private ["_activeControl","_bg","_btn_arr","_buffer","_button_gen","_config","_control","_display","_interactActions","_interactedItem","_logicCheck","_magCount","_mainConfig","_mainMissionConfig","_pos","_repack","_repackConfig","_repackMissionConfig","_selectedItemConfig","_selectedItemMissionConfig","_start_idc","_thisItem","_thisItemType","_y2d"];
 //[[[end]]]
 
 _interactActions = [];
