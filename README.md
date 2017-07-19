@@ -20,7 +20,7 @@ Arma Public License Share Alike (APL-SA) - https://www.bistudio.com/community/li
 
 Github:
 =====
-https://github.com/EpochModTeam/Enhanced-Arma3-Inventory
+https://github.com/EpochModTeam/Enhanced-Arma-3-Inventory
 
 Download:
 =====
